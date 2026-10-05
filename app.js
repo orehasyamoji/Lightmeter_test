@@ -26,7 +26,7 @@ function save(){const snapshot=structuredClone(state);const task=writeQueue.then
 function saveInput(){save().catch(()=>toast('保存できませんでした。書き出しでバックアップしてください。'));}
 function options(id,values,formatter=String){$(id).replaceChildren(...values.map(v=>{const o=document.createElement('option');o.value=v;o.textContent=formatter(v);return o;}));}
 function renderRolls(){$('rollSelect').replaceChildren(...state.rolls.map((r,i)=>{const o=document.createElement('option');o.value=r.id;o.textContent=String(i+1).padStart(2,'0')+' / '+r.brand+' / ISO '+r.iso;return o;}));$('rollSelect').value=state.activeRoll;}
-function renderInputs(){const r=current(),v=state.inputs;$('filmIso').value=r.iso;$('nextFrame').value=r.nextFrame;for(const k of ['refIso','refF','refSs','filmF','filmSs'])$(k).value=v[k];update();}
+function renderInputs(){const r=current(),v=state.inputs;$('nextFrame').value=r.nextFrame;for(const k of ['refIso','refF','refSs','filmF','filmSs'])$(k).value=v[k];update();}
 function update(){
  const v=state.inputs;$('apMode').classList.toggle('active',v.mode==='ap');$('ssMode').classList.toggle('active',v.mode==='ss');$('ev').textContent=(v.ev>0?'+':'')+v.ev+' EV';
  try{result=calculate(+v.refIso,+v.refF,+v.refSs,+current().iso,+(v.mode==='ap'?v.filmF:v.filmSs),v.mode,v.ev);
@@ -59,7 +59,6 @@ async function init(){
  db=await openDB();state=await readDB();if(!state){const r=newRoll();state={rolls:[r],activeRoll:r.id,inputs:{refIso:200,refF:4,refSs:1/30,filmF:1.4,filmSs:1/250,mode:'ap',ev:0}};await save();}
  renderRolls();renderInputs();renderLogs();
  for(const k of ['refIso','refF','refSs','filmF','filmSs'])$(k).onchange=()=>{const value=+$(k).value;if(k==='refIso'&&(!Number.isFinite(value)||value<1||value>102400)){$(k).value=state.inputs[k];toast('ISOは1〜102400で入力してください。');return;}state.inputs[k]=value;if(k==='filmF')state.inputs.mode='ap';if(k==='filmSs')state.inputs.mode='ss';update();saveInput();};
- $('filmIso').onchange=()=>{const n=+$('filmIso').value;if(!Number.isFinite(n)||n<1||n>102400){$('filmIso').value=current().iso;toast('ISOは1〜102400で入力してください。');return;}current().iso=n;renderRolls();update();saveInput();};
  $('nextFrame').onchange=()=>{const n=+$('nextFrame').value;if(!Number.isInteger(n)||n<1||n>999){$('nextFrame').value=current().nextFrame;return;}current().nextFrame=n;update();saveInput();};
  $('apMode').onclick=()=>{state.inputs.mode='ap';update();saveInput();};$('ssMode').onclick=()=>{state.inputs.mode='ss';update();saveInput();};
  $('fMinus').onclick=()=>step('filmF',-1);$('fPlus').onclick=()=>step('filmF',1);$('ssMinus').onclick=()=>step('filmSs',-1);$('ssPlus').onclick=()=>step('filmSs',1);
