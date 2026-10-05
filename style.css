@@ -1,1 +1,41 @@
 :root{color-scheme:dark;--bg:#151615;--card:#202220;--line:#393b37;--ink:#f5f1e7;--muted:#aaa99f;--gold:#efbd6b}*{box-sizing:border-box}html{touch-action:manipulation}body{margin:0;background:var(--bg);color:var(--ink);font:16px -apple-system,BlinkMacSystemFont,sans-serif}main{max-width:520px;margin:auto;padding:calc(20px + env(safe-area-inset-top)) 18px calc(100px + env(safe-area-inset-bottom))}header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}h1{font-size:23px;letter-spacing:4px;margin:0}h2{font-size:17px;margin:0 0 16px}p{line-height:1.6}#offline{border:1px solid var(--gold);border-radius:20px;padding:5px 9px;color:var(--gold);font-size:10px}button,input,select{font:inherit}button{cursor:pointer;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;min-height:46px;padding:10px 14px;white-space:nowrap}button:disabled{opacity:.45}button:active{transform:scale(.98)}input,select{width:100%;min-height:48px;background:#191b19;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px;font-size:18px}label{display:block;font-size:12px;color:var(--muted)}label input,label select{margin-top:7px}section,.entry{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:18px;margin-top:16px}.row{display:flex;gap:10px;align-items:center}.row select{flex:1;min-width:0}#rollSelect{font-size:16px}.fields>*{flex:1;min-width:0}.small{font-size:12px;color:var(--muted)}.seg{display:flex;margin:16px 0;gap:4px;background:#151615;border-radius:10px;padding:4px}.seg button{flex:1;border:0;min-height:40px;font-size:14px}.seg .active,.primary{background:var(--gold);color:#211b12}.readout{display:flex;align-items:center;gap:12px;margin:10px 0 20px}.readout select{flex:1;min-width:0;color:var(--gold);font-size:38px;font-weight:650;text-align:center;border:0;background:transparent;min-height:64px;font-variant-numeric:tabular-nums}.readout button{font-size:26px;width:48px;padding:0}.primary{width:100%;font-weight:650;font-size:18px;margin-top:18px;border:0}.caption{text-align:center;margin:10px 0}.comp{border-top:1px solid var(--line);padding-top:16px;display:flex;justify-content:space-between;align-items:center}.comp output{min-width:52px;text-align:center;font-size:14px}.comp .row{gap:6px}.comp button{padding:8px 12px}nav{position:fixed;bottom:0;left:0;right:0;background:#181a18;border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;justify-content:center;gap:16px}nav button{border:0;flex:1;max-width:160px;background:transparent;font-size:14px}nav .active{color:var(--gold)}[hidden]{display:none!important}.entry header{margin:0 0 12px;gap:8px}.entry strong{font-size:18px}.entry .params{font-size:20px;font-weight:600}.entry button{font-size:12px;padding:6px 10px;min-height:36px}dialog{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:18px;width:calc(100% - 28px);max-width:460px;padding:22px}dialog::backdrop{background:#000a}dialog label{margin:14px 0}dialog .row{margin-top:18px}dialog .row button{flex:1;margin:0}#message{position:fixed;top:calc(12px + env(safe-area-inset-top));left:16px;right:16px;max-width:488px;margin:auto;background:#eee4ce;color:#211b12;border-radius:10px;padding:14px;z-index:20}
+
+/* Compact instrument layout. Never clip controls on unusually small viewports. */
+:root{--nav-height:64px}
+main{padding:calc(10px + env(safe-area-inset-top)) 14px calc(var(--nav-height) + env(safe-area-inset-bottom) + 10px);min-height:100svh}
+main>header{margin-bottom:10px;min-height:26px}
+h1{font-size:20px;letter-spacing:3px}
+main>.row{gap:8px}
+main>.row button{padding:8px 10px}
+main>.row select,main>.row button{min-height:44px}
+#convert{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+#convert section{margin-top:0;padding:12px 14px;border-radius:13px}
+#convert h2{font-size:15px;margin:0 0 8px}
+#convert .seg{margin:0 0 8px;padding:3px}
+#convert .seg button{min-height:40px;padding:6px}
+#convert .readout{margin:2px 0 8px;gap:10px}
+#convert .readout select{min-height:44px;height:44px;padding:0 8px;font-size:32px}
+#convert .readout button{height:44px;min-height:44px;width:44px}
+#rounding{font-size:11px;line-height:1.4;margin:4px 0 8px}
+#convert .comp{padding-top:8px}
+#convert .comp button{min-height:44px}
+#convert .fields{gap:8px}
+#convert .fields input,#convert .fields select{margin-top:4px;min-height:44px;padding:8px;font-size:16px}
+.record-row{display:flex;gap:12px;align-items:end}
+.record-row label{flex:0 0 90px}
+.record-row input{min-height:44px;height:44px;margin-top:4px;padding:8px;font-size:16px}
+.record-row .primary{flex:1;min-width:0;margin:0;min-height:44px;height:44px;font-size:17px}
+nav{padding:8px 14px calc(8px + env(safe-area-inset-bottom));gap:12px}
+nav button{min-height:44px}
+#convert label{line-height:1.2}
+@media (max-height:740px){
+ main{padding-top:calc(6px + env(safe-area-inset-top))}
+ main>header{margin-bottom:6px}
+ #convert{gap:6px;margin-top:6px}
+ #convert section{padding:9px 12px}
+ #convert h2{margin-bottom:5px}
+ #convert .seg{margin-bottom:5px}
+ #convert .readout{margin-bottom:5px}
+ #rounding{margin:2px 0 5px}
+ #convert .comp{padding-top:5px}
+}
